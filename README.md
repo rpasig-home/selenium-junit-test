@@ -1,1 +1,12 @@
-# selenium-junit-test
+# Selenium + JUnit 5 + Docker Compose (Portfolio Demo)
+
+This repo demonstrates a CI-ready UI automation setup:
+- Mock web app (Node/Express)
+- Selenium Standalone Chrome
+- JUnit 5 tests (RemoteWebDriver)
+- Docker Compose orchestration + healthchecks
+- GitHub Actions CI
+
+## Run with Docker
+```bash
+docker compose up --build --exit-code-from tests
