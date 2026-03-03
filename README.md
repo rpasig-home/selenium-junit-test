@@ -7,6 +7,16 @@ This repo demonstrates a CI-ready UI automation setup:
 - Docker Compose orchestration + healthchecks
 - GitHub Actions CI
 
-## Run with Docker
+# Dependencies
+    
+- install java (java 17)
+- If using VS Code, install Java Extension Pack
+- Install Maven for project management
+- install Allure
+
+## Run tests with Docker
 ```bash
-docker compose up --build --exit-code-from tests
+make test
+
+## View allure report post test run
+http://localhost:5050/allure-docker-service/latest-report

@@ -1,6 +1,7 @@
 package com.example;
 
 import com.example.extensions.LoggingExtension;
+import com.example.extensions.AllureScreenshotExtension;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -11,11 +12,16 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.net.URL;
 import java.time.Duration;
 
-@ExtendWith(LoggingExtension.class)
-public abstract class BaseSeleniumTest {
+@ExtendWith({LoggingExtension.class, AllureScreenshotExtension.class})
+public abstract class BaseSeleniumTest implements AllureScreenshotExtension.HasDriver {
   protected WebDriver driver;
   protected String baseUrl;
-
+  
+  @Override
+  public WebDriver getDriver() {
+    return driver;
+  }
+  
   @BeforeEach
   void setUp() throws Exception {
     baseUrl = System.getenv().getOrDefault("BASE_URL", "http://localhost:3000");

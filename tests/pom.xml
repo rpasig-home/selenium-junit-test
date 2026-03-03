@@ -47,6 +47,12 @@
       <version>1.5.6</version>
     </dependency>
 
+    <dependency>
+      <groupId>io.qameta.allure</groupId>
+      <artifactId>allure-junit5</artifactId>
+      <version>2.25.0</version>
+    </dependency>
+
   </dependencies>
 
   <build>
@@ -57,8 +63,12 @@
         <version>3.3.1</version>
         <configuration>
           <useModulePath>false</useModulePath>
+          <systemPropertyVariables>
+            <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
+          </systemPropertyVariables>
         </configuration>
       </plugin>
+
     </plugins>
   </build>
 </project>

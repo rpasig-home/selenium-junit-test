@@ -32,4 +32,17 @@ services:
     environment:
       - BASE_URL=http://web:3000
       - SELENIUM_URL=http://selenium:4444/wd/hub
-    command: ["mvn", "-q", "test"]
+    volumes:
+      - ./tests/target:/work/target
+    command: ["mvn", "-q", "-Dallure.results.directory=/work/target/allure-results", "test"]
+  
+  report:
+    image: frankescobar/allure-docker-service:2.27.0
+    ports:
+      - "5050:5050"
+    environment:
+      CHECK_RESULTS_EVERY_SECONDS: "3"
+      KEEP_HISTORY: "1"
+    volumes:
+      - ./tests/target/allure-results:/app/allure-results
+      - ./tests/target/allure-report:/app/default-reports
