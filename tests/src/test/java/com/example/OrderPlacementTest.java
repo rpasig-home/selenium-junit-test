@@ -2,16 +2,38 @@ package com.example;
 
 import com.example.pages.TradingPage;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class OrderPlacementTest extends BaseSeleniumTest {
 
+
+
+  @Test
+  void canPlaceMockOrder() {
+    
+    driver.get(baseUrl + "/");
+
+    var page = new TradingPage(driver);
+    assertEquals("Mock Trading UI", page.getTitle());
+
+    page.setSymbol("NVDA");
+    page.setQty("3");
+    page.clickPlace();
+
+    new WebDriverWait(driver, Duration.ofSeconds(5))
+        .until(d -> page.getResult().contains("Placed order:"));
+
+    assertTrue(page.getResult().contains("NVDA x 3"));
+  }
+ 
   @ParameterizedTest(name = "places order for {0} x {1}")
   @CsvSource({
       "NVDA, 3",
